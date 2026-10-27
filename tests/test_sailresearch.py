@@ -33,13 +33,17 @@ def test_models_register_with_key(monkeypatch, registered):
     from llm_sailresearch import SailChat, MODELS, register_models
 
     register_models(registered)
-    assert [(m.model_id, am.model_id) for m, am, _ in registered.pairs] == [
-        (model_id, model_id) for model_id in MODELS
+    assert [(m.model_id, m.model_name) for m, _, _ in registered.pairs] == [
+        (f"sailresearch/{model_id}", model_id) for model_id in MODELS
     ]
     for model, async_model, _ in registered.pairs:
         assert isinstance(model, SailChat)
+        # Namespaced IDs, raw API IDs in model_name
+        assert model.model_id.startswith("sailresearch/")
+        assert model.model_name == model.model_id.removeprefix("sailresearch/")
         # Each sync model registered in an (sync, async) pair
         assert async_model.model_id == model.model_id
+        assert async_model.model_name == model.model_name
 
 
 def test_no_registration_without_key(monkeypatch, registered):
@@ -97,4 +101,4 @@ def test_vision_model_attachment_types():
 def test_model_str():
     from llm_sailresearch import SailChat
 
-    assert str(SailChat("zai-org/GLM-5.3")) == "Sail: zai-org/GLM-5.3"
+    assert str(SailChat("zai-org/GLM-5.3")) == "Sail: sailresearch/zai-org/GLM-5.3"

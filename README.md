@@ -33,19 +33,20 @@ Or export it as an environment variable:
 export SAIL_API_KEY=...
 ```
 
-Run `llm models` to get the list of models. Model IDs are namespaced, e.g.
-`zai-org/GLM-5.3`, `moonshotai/Kimi-K3` or `deepseek-ai/DeepSeek-V4-Pro-0813`.
+Run `llm models` to get the list of models. Model IDs are namespaced with a
+`sailresearch/` prefix, which is used to avoid conflicts with models from
+other plugins that share the same upstream model names.
 
 Run prompts like this:
 
 ```bash
-llm -m zai-org/GLM-5.3 'five great names for a pet ocelot'
+llm -m sailresearch/zai-org/GLM-5.3 'five great names for a pet ocelot'
 ```
 
 Reasoning effort accepts `none`, `minimal`, `low`, `medium`, `high`, `xhigh` or `max` (`max` is the same tier as `xhigh`):
 
 ```bash
-llm -m zai-org/GLM-5.3 'Explain diffusion models' -o reasoning_effort xhigh
+llm -m sailresearch/zai-org/GLM-5.3 'Explain diffusion models' -o reasoning_effort xhigh
 ```
 
 The `moonshotai/Kimi-K3`, `moonshotai/Kimi-K2.6`, `google/gemma-4-31B-it` and
@@ -53,7 +54,7 @@ The `moonshotai/Kimi-K3`, `moonshotai/Kimi-K2.6`, `google/gemma-4-31B-it` and
 attachments (JPEG, PNG, WebP or GIF):
 
 ```bash
-llm -m moonshotai/Kimi-K3 -a cat.jpg 'What is in this image?'
+llm -m sailresearch/moonshotai/Kimi-K3 -a cat.jpg 'What is in this image?'
 ```
 
 ## Options
