@@ -1,0 +1,23 @@
+[project]
+name = "llm-sailresearch"
+version = "0.1"
+description = "Access Sail Research hosted models via API"
+readme = "README.md"
+authors = [{name = "James Doyle"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+requires-python = ">=3.10"
+dependencies = [
+    "llm>=0.10"
+]
+[project.urls]
+Homepage = "https://github.com/james2doyle/llm-sailresearch"
+Changelog = "https://github.com/james2doyle/llm-sailresearch/releases"
+Issues = "https://github.com/james2doyle/llm-sailresearch/issues"
+CI = "https://github.com/james2doyle/llm-sailresearch/actions"
+[project.entry-points.llm]
+sailresearch = "llm_sailresearch"
+[project.optional-dependencies]
+test = ["pytest"]
